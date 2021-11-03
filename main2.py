@@ -18,3 +18,5 @@ with open('calificaciones.csv') as csvfile:
 
 for alumno in listAlumnos:
     print("Nombre:", alumno.getNombre() + ",", "Promedio:", alumno.getPromedio())
+
+print("Solo para realizar un commit")
