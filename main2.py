@@ -1,23 +1,47 @@
 """PROGRAMA PRINCIPAL
 desde este programa se accesará a la clase creada"""
 
-import csv
-import claseAlumnos as cAlumnos
-#Leer como diccionario
+import pointClass
 
-listAlumnos = []
+#p3 a p4 son los puntos que tienen la menor distancia e imprimir la distancia entre ellos
+p1 = pointClass.Punto(1,1)
+p2 = pointClass.Punto(0,10)
+p3 = pointClass.Punto(-8,4)
+p4 = pointClass.Punto(1,3)
+listaPuntos = [p1, p2, p3, p4]
 
-with open('calificaciones.csv') as csvfile:
-    misCalificaciones = csv.DictReader(csvfile)
+distancia = []
+cont = 0
+minPar = [cont, 0]
+for point in listaPuntos:
+    for i in range(len(listaPuntos)):
+        if cont == i:
+            continue
 
-    for filas in misCalificaciones:
-        auxAlumno = cAlumnos.Alumno(filas['Nombre'], float(filas['Unidad 1']), float(filas['Unidad 2']),
-                                    float(filas['Unidad 3']), float(filas['Unidad 4']))
-        listAlumnos.append(auxAlumno)
-    csvfile.close()
+        distancia.append(point.calDist(listaPuntos[i]))
 
-for alumno in listAlumnos:
-    print("Nombre:", alumno.getNombre() + ",", "Promedio:", alumno.getPromedio())
+        if distancia[-1] <= min(distancia):
+            minDist = distancia[-1]
+            minPar = [cont, i]
+        #print(distancia)
+    cont = cont + 1
 
-print("Se supone que esto debe estar en linea y un segundo y se pueden poner los que quieran")
-print("este es el cuarto commit")
+"""
+Valores utilizados:
+p1 = pointClass.Punto(1,1)
+p2 = pointClass.Punto(0,10)
+p3 = pointClass.Punto(-8,4)
+p4 = pointClass.Punto(1,3)
+listaPuntos = [p1, p2, p3, p4]
+"""
+print("El primer punto tiene las coordenadas:")
+listaPuntos[minPar[0]].printPoint()
+print("El segundo punto tiene las coordenadas:")
+listaPuntos[minPar[1]].printPoint()
+print("La distancia entre estos puntos es:", minDist)
+
+
+
+
+
+
